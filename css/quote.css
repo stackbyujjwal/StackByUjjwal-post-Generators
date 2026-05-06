@@ -1,0 +1,162 @@
+/* CSS Variables for easy color theming */
+:root {
+    --theme-color: #00e676;
+}
+
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editor-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    justify-content: center;
+}
+
+#post-canvas {
+    width: 540px;
+    height: 675px;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 40px;
+    flex-shrink: 0;
+}
+
+.post-card {
+    width: 100%;
+    max-width: 420px; 
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -30px; 
+}
+
+.post-card::before,
+.post-card::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid white;
+    pointer-events: none;
+    z-index: 1; 
+}
+
+.post-card::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.post-card::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+.quotes {
+    font-size: 70px;
+    font-weight: bold;
+    color: var(--theme-color);
+    position: absolute;
+    line-height: 1;
+    z-index: 2; 
+}
+
+.start-quote { top: 10px; left: 20px; }
+.end-quote { bottom: 10px; right: 20px; }
+
+.content-wrap {
+    text-align: center;
+    position: relative;
+    z-index: 3; 
+    padding: 20px 0;
+    width: 100%;
+}
+
+.quote-text {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+}
+
+.author-text {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #e0e0e0;
+    position: relative;
+    display: inline-block;
+}
+
+.author-text::after {
+    content: '';
+    display: block;
+    width: 30%;
+    height: 2px;
+    background-color: var(--theme-color);
+    margin: 10px auto 0 auto;
+}
+
+.watermark {
+    position: absolute;
+    bottom: 30px;
+    color: #424242; 
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+.controls h3 { margin-top: 0; margin-bottom: 20px; color: #333; }
+
+.input-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+.input-group label { font-size: 14px; font-weight: 600; margin-bottom: 5px; color: #555; }
+.input-group input[type="text"], .input-group textarea {
+    padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s; resize: vertical;
+}
+.input-group input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; }
+.input-group input:focus, .input-group textarea:focus { border-color: #3a86ff; }
+
+.download-btn {
+    background-color: var(--theme-color); 
+    color: black; border: none; padding: 15px 25px; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px;
+}
+.download-btn:hover { filter: brightness(0.9); }
+.instructions { font-size: 13px; color: #666; margin-top: 15px; text-align: center; }
+hr { border: 0; height: 1px; background: #eee; width: 100%; margin: 15px 0; }

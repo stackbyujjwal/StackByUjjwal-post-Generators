@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmer Quote Generator</title>
+    <link rel="stylesheet" href="../css/quote.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="editor-container">
+        
+        <div id="post-canvas">
+            <div class="post-card">
+                <div class="quotes start-quote">“</div>
+                
+                <div class="content-wrap">
+                    <div class="quote-text" id="card-quote">"You might not think that
+programmers are artists, But
+Programming is an extremely
+creative profession. It's Logic -
+Based Creativity."</div>
+                    
+                    <div class="author-text" id="card-author">
+                        - John Romero
+                    </div>
+                </div>
+                
+                <div class="quotes end-quote">”</div>
+            </div>
+            <div class="watermark" id="card-watermark">@stackbyujjwal</div>
+        </div>
+
+        <div class="controls">
+            <h3>Edit Post Content</h3>
+            
+            <div class="input-group">
+                <label>Quote Text</label>
+                <textarea rows="6" oninput="updateText('card-quote', this.value)">"You might not think that
+programmers are artists, But
+Programming is an extremely
+creative profession. It's Logic -
+Based Creativity."</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Author Name</label>
+                <input type="text" value="- John Romero" oninput="updateText('card-author', this.value)">
+            </div>
+
+            <div class="input-group">
+                <label>Watermark</label>
+                <input type="text" value="@stackbyujjwal" oninput="updateText('card-watermark', this.value)">
+            </div>
+
+            <div class="input-group">
+                <label>Theme Color</label>
+                <input type="color" value="#00e676" oninput="updateColor(this.value)">
+            </div>
+
+            <hr>
+
+            <button class="download-btn" onclick="downloadPost()">Download Post</button>
+            <p class="instructions">Clicking this will automatically export a 1080x1350 HQ image for Instagram.</p>
+        </div>
+
+    </div>
+
+    <script src="../js/quote.js"></script>
+
+</body>
+</html>

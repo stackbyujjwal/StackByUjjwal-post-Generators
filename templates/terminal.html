@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Motivation Generator</title>
+    <link rel="stylesheet" href="../css/terminal.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="editor-container">
+        
+        <div id="post-card">
+            <div class="main-title" id="card-title">CODING</div>
+            
+            <div class="terminal-card">
+                <div class="terminal-header">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="filename" id="card-username">@stackbyujjwal</div>
+                </div>
+                
+                <div class="quote-text" id="card-quote">"Coding is like a game.
+The more you play, the better you get."</div>
+                
+                <div class="hashtags" id="card-hashtags">#Quote #Programming #Coding</div>
+            </div>
+            
+            <div class="watermark" id="card-watermark">© StackByUjjwal</div>
+        </div>
+
+        <div class="controls">
+            <h3>Edit Post Content</h3>
+
+            <div class="input-group">
+                <label>Main Title</label>
+                <input type="text" value="CODING" oninput="updateText('card-title', this.value)">
+            </div>
+
+            <div class="input-group">
+                <label>Terminal Username/Filename</label>
+                <input type="text" value="@stackbyujjwal" oninput="updateText('card-username', this.value)">
+            </div>
+            
+            <div class="input-group">
+                <label>Quote Text</label>
+                <textarea rows="4" oninput="updateText('card-quote', this.value)">"Coding is like a game.
+The more you play, the better you get."</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Hashtags</label>
+                <input type="text" value="#Quote #Programming #Coding" oninput="updateText('card-hashtags', this.value)">
+            </div>
+
+            <div class="input-group">
+                <label>Watermark</label>
+                <input type="text" value="© StackByUjjwal" oninput="updateText('card-watermark', this.value)">
+            </div>
+
+            <hr>
+
+            <button class="download-btn" onclick="downloadPost()">Download Post</button>
+            <p class="instructions">Clicking this will automatically export a 1080x1350 HQ image for Instagram.</p>
+        </div>
+
+    </div>
+
+    <script src="../js/terminal.js"></script>
+</body>
+</html>

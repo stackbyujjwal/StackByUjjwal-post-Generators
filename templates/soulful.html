@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Soulful Quotes & Image Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind&family=Inter&family=Kalam&family=Karma&family=Khand&family=Lora&family=Merriweather&family=Montserrat&family=Mukta&family=Noto+Sans+Devanagari&family=Open+Sans&family=PT+Serif&family=Playfair+Display&family=Poppins&family=Raleway&family=Roboto&family=Sahitya&family=Teko&family=Tiro+Devanagari+Hindi&family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/soulful.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="editor-container">
+        <div id="post-canvas">
+            <img id="bg-image-layer" src="" alt="Background">
+            <div class="text-wrapper" id="text-container">
+                <div class="line-1" id="display-line1">Your First Line Here</div>
+                <div class="line-2" id="display-line2">Your Highlighted Line Here</div>
+            </div>
+            <div class="watermark-container">
+                <div class="orange-bar"></div>
+                <div class="watermark-text" id="display-watermark">YOUR.WATERMARK.HERE</div> 
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="input-group">
+                <label>Font Style:</label>
+                <select onchange="updateFont(this.value)">
+                    <option value="'Segoe UI', -apple-system, Roboto, sans-serif">Segoe UI (Default)</option>
+                    <option value="'Roboto', sans-serif">Roboto</option>
+                    <option value="'Poppins', sans-serif">Poppins</option>
+                    <option value="'Montserrat', sans-serif">Montserrat</option>
+                    <option value="'Kalam', cursive">Kalam (Hindi)</option>
+                    <option value="'Mukta', sans-serif">Mukta (Hindi)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Text Alignment:</label>
+                <select onchange="updateAlignment(this.value)">
+                    <option value="center">Center</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Text Size: <span id="size-val">26px</span></label>
+                <input type="range" min="12" max="50" value="26" oninput="updateTextSize(this.value)">
+            </div>
+            
+            <div class="input-group">
+                <label>Text Colors:</label>
+                <div class="color-row">
+                    <div class="color-box">
+                        <span style="font-size: 11px;">Line 1</span>
+                        <input type="color" value="#ffffff" oninput="updateColor('display-line1', this.value)">
+                    </div>
+                    <div class="color-box">
+                        <span style="font-size: 11px;">Line 2</span>
+                        <input type="color" value="#3b9bd6" oninput="updateColor('display-line2', this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Move Text (Up/Down/Left/Right):</label>
+                <div class="move-grid">
+                    <button class="move-btn" onclick="moveText('left')">◀</button>
+                    <button class="move-btn" onclick="moveText('up')">▲</button>
+                    <button class="move-btn" onclick="moveText('down')">▼</button>
+                    <button class="move-btn" onclick="moveText('right')">▶</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Background Image:</label>
+                <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)">
+                <div class="paste-hint">Or paste (Ctrl+V) an image anywhere!</div>
+            </div>
+
+            <div class="input-group">
+                <label>Image Transparency: <span id="opacity-val">50%</span></label>
+                <input type="range" id="opacity-slider" min="0" max="1" step="0.05" value="0.5" oninput="updateOpacity(this.value)">
+            </div>
+
+            <div class="input-group">
+                <label>White Text (Line 1):</label>
+                <textarea rows="2" oninput="updateText('display-line1', this.value)">Your First Line Here</textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>Colored Text (Line 2):</label>
+                <textarea rows="2" oninput="updateText('display-line2', this.value)">Your Highlighted Line Here</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Watermark Text:</label>
+                <input type="text" value="YOUR.WATERMARK.HERE" oninput="updateText('display-watermark', this.value)">
+            </div>
+
+            <button class="download-btn" onclick="downloadPost()">Download High Quality PNG</button>
+        </div>
+    </div>
+
+    <script src="../js/soulful.js"></script>
+</body>
+</html>
