@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StackByUjjwal - Best Post Generator</title>
+    <title>StackByUjjwal - Pro Post Generator</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header class="navbar">
-        <div class="logo">StackByUjjwal <span>Generators</span></div>
+        <div class="logo">
+            <i class="fa-solid fa-layer-group"></i> StackByUjjwal <span>Generators</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+        </nav>
     </header>
 
     <div class="hero">
-        <h1>Create Stunning Posts in Seconds</h1>
-        <p>Select a template below, customize your text, and download high-quality images for your social media.</p>
+        <div class="hero-content">
+            <h1>Automate Your <span>Content Creation</span></h1>
+            <p>Generate high-quality, customized images for your social media in seconds. Select a template, tweak the design, and download in HD.</p>
+            <a href="#templates" class="btn-primary">Explore Templates <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div id="templates" class="section-title">
+        <h2>Choose Your Template</h2>
+        <p>Pick a design that fits your brand's vibe.</p>
     </div>
 
     <div class="templates-grid">
-
          <div class="card">
             <img src="images/preview-soulful.png" alt="Soulful Template">
             <div class="card-content">
                 <h3>Soulful Image Editor</h3>
-                <p>Custom backgrounds and typography for any quote.</p>
-                <a href="templates/soulful.html" class="btn">Use Template</a>
+                <p>Custom backgrounds & typography for aesthetic quotes.</p>
+                <a href="templates/soulful.html" class="btn-outline">Use Template</a>
             </div>
         </div>
         
@@ -33,8 +47,8 @@
             <img src="images/preview-terminal.png" alt="Terminal Template">
             <div class="card-content">
                 <h3>Terminal Motivation</h3>
-                <p>Great for coding quotes and developer tips.</p>
-                <a href="templates/terminal.html" class="btn">Use Template</a>
+                <p>Perfect for developer tips and coding aesthetics.</p>
+                <a href="templates/terminal.html" class="btn-outline">Use Template</a>
             </div>
         </div>
 
@@ -42,8 +56,8 @@
             <img src="images/preview-quote.png" alt="Quote Template">
             <div class="card-content">
                 <h3>Programmer Quote</h3>
-                <p>Clean UI with brackets for deep quotes.</p>
-                <a href="templates/quote.html" class="btn">Use Template</a>
+                <p>Clean brackets UI for deep tech quotes.</p>
+                <a href="templates/quote.html" class="btn-outline">Use Template</a>
             </div>
         </div>
 
@@ -51,13 +65,26 @@
             <img src="images/preview-quiz.png" alt="Quiz Template">
             <div class="card-content">
                 <h3>Tech Quiz Generator</h3>
-                <p>Engage your audience with multiple-choice questions.</p>
-                <a href="templates/quiz.html" class="btn">Use Template</a>
+                <p>Engage your audience with custom MCQ posts.</p>
+                <a href="templates/quiz.html" class="btn-outline">Use Template</a>
             </div>
         </div>
-
-       
     </div>
+
+   <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-social-links">
+                <a href="https://github.com/StackByUjjwal" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/StackByUjjwal" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/StackByUjjwal" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@StackByUjjwal" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://t.me/Stackbyujjwal_tech" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="footer-copyright">
+                &copy; 2026 StackByUjjwal. All rights reserved. | <a href="about.html">About Me</a>
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
