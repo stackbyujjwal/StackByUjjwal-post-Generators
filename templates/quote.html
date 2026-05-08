@@ -3,71 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programmer Quote Generator</title>
+    <title>Quote Generator - Pro Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/quote.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../js/quote.js" defer></script>
 </head>
 <body>
-
-    <div class="editor-container">
-        
-        <div id="post-canvas">
-            <div class="post-card">
-                <div class="quotes start-quote">“</div>
-                
-                <div class="content-wrap">
-                    <div class="quote-text" id="card-quote">"You might not think that
-programmers are artists, But
-Programming is an extremely
-creative profession. It's Logic -
-Based Creativity."</div>
-                    
-                    <div class="author-text" id="card-author">
-                        - John Romero
+    <div class="app-container">
+        <div class="preview-wrapper">
+            <div class="preview-label">Live Preview</div>
+            <div id="original-preview-container" style="width: 100%; display: flex; justify-content: center;">
+                <div id="post-canvas" class="ratio-4-5">
+                    <div class="post-card" id="card-container">
+                        <div class="quotes start-quote">“</div>
+                        <div class="content-wrap">
+                            <div class="quote-text" id="display-quote">"Programming is an extremely creative profession. It's Logic - Based Creativity."</div>
+                            <div class="author-text" id="display-author">- John Romero</div>
+                        </div>
+                        <div class="quotes end-quote">”</div>
                     </div>
+                    <div class="watermark" id="display-watermark">@stackbyujjwal</div>
                 </div>
-                
-                <div class="quotes end-quote">”</div>
             </div>
-            <div class="watermark" id="card-watermark">@stackbyujjwal</div>
         </div>
 
-        <div class="controls">
-            <h3>Edit Post Content</h3>
-            
-            <div class="input-group">
-                <label>Quote Text</label>
-                <textarea rows="6" oninput="updateText('card-quote', this.value)">"You might not think that
-programmers are artists, But
-Programming is an extremely
-creative profession. It's Logic -
-Based Creativity."</textarea>
+        <div class="editor-panel">
+            <div class="panel-header"><h1>Edit Quote Design</h1></div>
+            <div class="panel-content">
+                <details class="control-section" open>
+                    <summary class="section-summary">Text Content</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Quote Font</label>
+                            <select class="saas-input" onchange="updateFont(this.value)">
+                                <option value="'Inter', sans-serif">Inter (Clean)</option>
+                                <option value="'Playfair Display', serif">Playfair Display (Classy)</option>
+                                <option value="'Space Mono', monospace">Space Mono (Tech)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Quote & Author</label>
+                            <textarea class="saas-input" oninput="updateText('display-quote', this.value)">"Programming is an extremely creative profession. It's Logic - Based Creativity."</textarea>
+                            <input type="text" class="saas-input" style="margin-top:10px;" value="- John Romero" oninput="updateText('display-author', this.value)">
+                        </div>
+                    </div>
+                </details>
+                <details class="control-section">
+                    <summary class="section-summary">Colors</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Theme & Background</label>
+                            <div class="color-row">
+                                <input type="color" value="#00e676" oninput="updateTheme(this.value)">
+                                <input type="color" value="#000000" oninput="updateBgColor(this.value)">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Watermark</label>
+                            <input type="text" class="saas-input" value="@stackbyujjwal" oninput="updateText('display-watermark', this.value)">
+                        </div>
+                    </div>
+                </details>
             </div>
-
-            <div class="input-group">
-                <label>Author Name</label>
-                <input type="text" value="- John Romero" oninput="updateText('card-author', this.value)">
+            <div class="panel-actions">
+                <button class="download-btn" onclick="openDownloadModal()">Export Post</button>
             </div>
-
-            <div class="input-group">
-                <label>Watermark</label>
-                <input type="text" value="@stackbyujjwal" oninput="updateText('card-watermark', this.value)">
-            </div>
-
-            <div class="input-group">
-                <label>Theme Color</label>
-                <input type="color" value="#00e676" oninput="updateColor(this.value)">
-            </div>
-
-            <hr>
-
-            <button class="download-btn" onclick="downloadPost()">Download Post</button>
-            <p class="instructions">Clicking this will automatically export a 1080x1350 HQ image for Instagram.</p>
         </div>
-
     </div>
 
-    <script src="../js/quote.js"></script>
-
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2>Export Settings</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body split-view">
+                <div class="modal-preview-side" id="modal-preview-container"></div>
+                <div class="modal-settings-side">
+                    <div class="input-group">
+                        <label class="input-label">Platform (Aspect Ratio)</label>
+                        <select id="export-ratio" class="saas-input" onchange="previewRatio(this.value)">
+                            <option value="ratio-4-5">Instagram Portrait (4:5)</option>
+                            <option value="ratio-1-1">Instagram Square (1:1)</option>
+                            <option value="ratio-9-16">Story / Reels (9:16)</option>
+                            <option value="ratio-16-9">YouTube / Twitter (16:9)</option>
+                            <option value="ratio-custom">Custom Size</option>
+                        </select>
+                    </div>
+                    <div id="custom-size-inputs" style="display: none; gap: 10px; margin-bottom: 16px;">
+                        <div style="flex: 1;"><label class="input-label">Width</label><input type="number" id="custom-width" class="saas-input" value="1080" oninput="applyCustomRatio()"></div>
+                        <div style="flex: 1;"><label class="input-label">Height</label><input type="number" id="custom-height" class="saas-input" value="1080" oninput="applyCustomRatio()"></div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" style="color:var(--accent);">Content Shrink / Grow</label>
+                        <input type="range" min="0.4" max="1.5" step="0.05" value="1" oninput="updateContentScale(this.value)">
+                        <span style="font-size: 10px; color:#888;">Slide to fit content perfectly</span>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Image Format</label>
+                        <select id="export-format" class="saas-input">
+                            <option value="png">PNG (High Quality)</option>
+                            <option value="jpeg">JPG (Smaller Size)</option>
+                        </select>
+                    </div>
+                    <button class="download-btn final-download-btn" onclick="executeDownload()">Download Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
