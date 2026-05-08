@@ -3,73 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Motivation Generator</title>
+    <title>Terminal Generator - Pro Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/terminal.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../js/terminal.js" defer></script>
 </head>
 <body>
-
-    <div class="editor-container">
-        
-        <div id="post-card">
-            <div class="main-title" id="card-title">CODING</div>
-            
-            <div class="terminal-card">
-                <div class="terminal-header">
-                    <div class="dots">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
+    <div class="app-container">
+        <div class="preview-wrapper">
+            <div class="preview-label">Live Preview</div>
+            <div id="original-preview-container" style="width: 100%; display: flex; justify-content: center;">
+                <div id="post-canvas" class="ratio-4-5">
+                    <div class="canvas-content">
+                        <div class="main-title" id="display-title">CODING</div>
+                        <div class="terminal-card" id="terminal-box">
+                            <div class="terminal-header">
+                                <div class="dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                                <div class="filename" id="display-username">@stackbyujjwal</div>
+                            </div>
+                            <div class="quote-text" id="display-quote">"Coding is like a game. The more you play, the better you get."</div>
+                            <div class="hashtags" id="display-hashtags">#Quote #Programming #Coding</div>
+                        </div>
                     </div>
-                    <div class="filename" id="card-username">@stackbyujjwal</div>
+                    <div class="watermark" id="display-watermark">© StackByUjjwal</div>
                 </div>
-                
-                <div class="quote-text" id="card-quote">"Coding is like a game.
-The more you play, the better you get."</div>
-                
-                <div class="hashtags" id="card-hashtags">#Quote #Programming #Coding</div>
             </div>
-            
-            <div class="watermark" id="card-watermark">© StackByUjjwal</div>
         </div>
 
-        <div class="controls">
-            <h3>Edit Post Content</h3>
-
-            <div class="input-group">
-                <label>Main Title</label>
-                <input type="text" value="CODING" oninput="updateText('card-title', this.value)">
+        <div class="editor-panel">
+            <div class="panel-header"><h1>Edit Terminal Design</h1></div>
+            <div class="panel-content">
+                <details class="control-section" open>
+                    <summary class="section-summary">Content</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Title & Username</label>
+                            <input type="text" class="saas-input" value="CODING" oninput="updateText('display-title', this.value)">
+                            <input type="text" class="saas-input" style="margin-top:10px;" value="@stackbyujjwal" oninput="updateText('display-username', this.value)">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Terminal Text</label>
+                            <textarea class="saas-input" oninput="updateText('display-quote', this.value)">"Coding is like a game. The more you play, the better you get."</textarea>
+                            <input type="text" class="saas-input" style="margin-top:10px;" value="#Quote #Programming #Coding" oninput="updateText('display-hashtags', this.value)">
+                        </div>
+                    </div>
+                </details>
+                <details class="control-section">
+                    <summary class="section-summary">Colors</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Terminal & BG Color</label>
+                            <div class="color-row">
+                                <input type="color" value="#021124" oninput="updateTerminalColor(this.value)">
+                                <input type="color" value="#050505" oninput="updateBgColor(this.value)">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Watermark</label>
+                            <input type="text" class="saas-input" value="© StackByUjjwal" oninput="updateText('display-watermark', this.value)">
+                        </div>
+                    </div>
+                </details>
             </div>
-
-            <div class="input-group">
-                <label>Terminal Username/Filename</label>
-                <input type="text" value="@stackbyujjwal" oninput="updateText('card-username', this.value)">
+            <div class="panel-actions">
+                <button class="download-btn" onclick="openDownloadModal()">Export Post</button>
             </div>
-            
-            <div class="input-group">
-                <label>Quote Text</label>
-                <textarea rows="4" oninput="updateText('card-quote', this.value)">"Coding is like a game.
-The more you play, the better you get."</textarea>
-            </div>
-
-            <div class="input-group">
-                <label>Hashtags</label>
-                <input type="text" value="#Quote #Programming #Coding" oninput="updateText('card-hashtags', this.value)">
-            </div>
-
-            <div class="input-group">
-                <label>Watermark</label>
-                <input type="text" value="© StackByUjjwal" oninput="updateText('card-watermark', this.value)">
-            </div>
-
-            <hr>
-
-            <button class="download-btn" onclick="downloadPost()">Download Post</button>
-            <p class="instructions">Clicking this will automatically export a 1080x1350 HQ image for Instagram.</p>
         </div>
-
     </div>
 
-    <script src="../js/terminal.js"></script>
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2>Export Settings</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body split-view">
+                <div class="modal-preview-side" id="modal-preview-container"></div>
+                <div class="modal-settings-side">
+                    <div class="input-group">
+                        <label class="input-label">Platform (Aspect Ratio)</label>
+                        <select id="export-ratio" class="saas-input" onchange="previewRatio(this.value)">
+                            <option value="ratio-4-5">Instagram Portrait (4:5)</option>
+                            <option value="ratio-1-1">Instagram Square (1:1)</option>
+                            <option value="ratio-9-16">Story / Reels (9:16)</option>
+                            <option value="ratio-16-9">YouTube / Twitter (16:9)</option>
+                            <option value="ratio-custom">Custom Size</option>
+                        </select>
+                    </div>
+                    <div id="custom-size-inputs" style="display: none; gap: 10px; margin-bottom: 16px;">
+                        <div style="flex: 1;"><label class="input-label">Width</label><input type="number" id="custom-width" class="saas-input" value="1080" oninput="applyCustomRatio()"></div>
+                        <div style="flex: 1;"><label class="input-label">Height</label><input type="number" id="custom-height" class="saas-input" value="1080" oninput="applyCustomRatio()"></div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label" style="color:var(--accent);">Content Shrink / Grow</label>
+                        <input type="range" min="0.4" max="1.5" step="0.05" value="1" oninput="updateContentScale(this.value)">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Image Format</label>
+                        <select id="export-format" class="saas-input">
+                            <option value="png">PNG (High Quality)</option>
+                            <option value="jpeg">JPG (Smaller Size)</option>
+                        </select>
+                    </div>
+                    <button class="download-btn final-download-btn" onclick="executeDownload()">Download Image</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
