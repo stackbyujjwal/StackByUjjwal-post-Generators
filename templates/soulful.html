@@ -2,108 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Soulful Quotes & Image Editor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind&family=Inter&family=Kalam&family=Karma&family=Khand&family=Lora&family=Merriweather&family=Montserrat&family=Mukta&family=Noto+Sans+Devanagari&family=Open+Sans&family=PT+Serif&family=Playfair+Display&family=Poppins&family=Raleway&family=Roboto&family=Sahitya&family=Teko&family=Tiro+Devanagari+Hindi&family=Yatra+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soulful Quotes - Pro Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind&family=Inter:wght@400;500;600;700&family=Kalam&family=Mukta&family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/soulful.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../js/soulful.js" defer></script>
 </head>
 <body>
-
-    <div class="editor-container">
-        <div id="post-canvas">
-            <img id="bg-image-layer" src="" alt="Background">
-            <div class="text-wrapper" id="text-container">
-                <div class="line-1" id="display-line1">Your First Line Here</div>
-                <div class="line-2" id="display-line2">Your Highlighted Line Here</div>
-            </div>
-            <div class="watermark-container">
-                <div class="orange-bar"></div>
-                <div class="watermark-text" id="display-watermark">YOUR.WATERMARK.HERE</div> 
+    <div class="app-container">
+        <div class="preview-wrapper">
+            <div class="preview-label">Live Preview</div>
+            <div id="post-canvas">
+                <img id="bg-image-layer" src="" alt="Background">
+                <div class="text-wrapper" id="text-container">
+                    <div class="line-1" id="display-line1">Aapki Pehli Line Yahan</div>
+                    <div class="line-2" id="display-line2">Highlighted Line Yahan</div>
+                </div>
+                <div class="watermark-container">
+                    <div class="orange-bar"></div>
+                    <div class="watermark-text" id="display-watermark">YOUR.WATERMARK</div> 
+                </div>
             </div>
         </div>
 
-        <div class="controls">
-            <div class="input-group">
-                <label>Font Style:</label>
-                <select onchange="updateFont(this.value)">
-                    <option value="'Segoe UI', -apple-system, Roboto, sans-serif">Segoe UI (Default)</option>
-                    <option value="'Roboto', sans-serif">Roboto</option>
-                    <option value="'Poppins', sans-serif">Poppins</option>
-                    <option value="'Montserrat', sans-serif">Montserrat</option>
-                    <option value="'Kalam', cursive">Kalam (Hindi)</option>
-                    <option value="'Mukta', sans-serif">Mukta (Hindi)</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Text Alignment:</label>
-                <select onchange="updateAlignment(this.value)">
-                    <option value="center">Center</option>
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Text Size: <span id="size-val">26px</span></label>
-                <input type="range" min="12" max="50" value="26" oninput="updateTextSize(this.value)">
-            </div>
-            
-            <div class="input-group">
-                <label>Text Colors:</label>
-                <div class="color-row">
-                    <div class="color-box">
-                        <span style="font-size: 11px;">Line 1</span>
-                        <input type="color" value="#ffffff" oninput="updateColor('display-line1', this.value)">
+        <div class="editor-panel">
+            <div class="panel-header"><h1>Edit Post Design</h1></div>
+            <div class="panel-content">
+                <details class="control-section" open>
+                    <summary class="section-summary">Typography</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Font Family</label>
+                            <select class="saas-input" onchange="updateFont(this.value)">
+                                <option value="'Inter', sans-serif">Inter (Modern)</option>
+                                <option value="'Poppins', sans-serif">Poppins</option>
+                                <option value="'Playfair Display', serif">Playfair Display</option>
+                                <option value="'Mukta', sans-serif">Mukta (Hindi)</option>
+                                <option value="'Kalam', cursive">Kalam (Handwritten)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Text Size</label>
+                            <input type="range" min="12" max="60" value="28" oninput="updateTextSize(this.value)">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Text Colors</label>
+                            <div class="color-row">
+                                <input type="color" value="#ffffff" oninput="updateColor('display-line1', this.value)">
+                                <input type="color" value="#3b9bd6" oninput="updateColor('display-line2', this.value)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="color-box">
-                        <span style="font-size: 11px;">Line 2</span>
-                        <input type="color" value="#3b9bd6" oninput="updateColor('display-line2', this.value)">
+                </details>
+                <details class="control-section" open>
+                    <summary class="section-summary">Content & Layout</summary>
+                    <div class="section-content">
+                        <div class="input-group">
+                            <label class="input-label">Line 1 & 2</label>
+                            <textarea class="saas-input" rows="2" oninput="updateText('display-line1', this.value)">Aapki Pehli Line Yahan</textarea>
+                            <textarea class="saas-input" rows="2" oninput="updateText('display-line2', this.value)" style="margin-top:10px;">Highlighted Line Yahan</textarea>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Move Text (Arrows)</label>
+                            <div class="move-grid">
+                                <button class="move-btn" onclick="moveText('left')">◀</button>
+                                <button class="move-btn" onclick="moveText('up')">▲</button>
+                                <button class="move-btn" onclick="moveText('down')">▼</button>
+                                <button class="move-btn" onclick="moveText('right')">▶</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </details>
+                <details class="control-section">
+                    <summary class="section-summary">Background & Branding</summary>
+                    <div class="section-content">
+                        <div class="input-group file-upload-wrapper">
+                            <button class="action-btn">Choose Image...</button>
+                            <input type="file" accept="image/*" onchange="handleImageUpload(event)" style="position:absolute; left:0; top:0; opacity:0; width:100%; height:100%; cursor:pointer;">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Overlay Opacity</label>
+                            <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateOpacity(this.value)">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Watermark Text</label>
+                            <input type="text" class="saas-input" value="YOUR.WATERMARK" oninput="updateText('display-watermark', this.value)">
+                        </div>
+                    </div>
+                </details>
             </div>
-
-            <div class="input-group">
-                <label>Move Text (Up/Down/Left/Right):</label>
-                <div class="move-grid">
-                    <button class="move-btn" onclick="moveText('left')">◀</button>
-                    <button class="move-btn" onclick="moveText('up')">▲</button>
-                    <button class="move-btn" onclick="moveText('down')">▼</button>
-                    <button class="move-btn" onclick="moveText('right')">▶</button>
-                </div>
+            <div class="panel-actions">
+                <button class="download-btn" onclick="openDownloadModal()">Export Post</button>
             </div>
-            
-            <div class="input-group">
-                <label>Background Image:</label>
-                <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)">
-                <div class="paste-hint">Or paste (Ctrl+V) an image anywhere!</div>
-            </div>
-
-            <div class="input-group">
-                <label>Image Transparency: <span id="opacity-val">50%</span></label>
-                <input type="range" id="opacity-slider" min="0" max="1" step="0.05" value="0.5" oninput="updateOpacity(this.value)">
-            </div>
-
-            <div class="input-group">
-                <label>White Text (Line 1):</label>
-                <textarea rows="2" oninput="updateText('display-line1', this.value)">Your First Line Here</textarea>
-            </div>
-            
-            <div class="input-group">
-                <label>Colored Text (Line 2):</label>
-                <textarea rows="2" oninput="updateText('display-line2', this.value)">Your Highlighted Line Here</textarea>
-            </div>
-
-            <div class="input-group">
-                <label>Watermark Text:</label>
-                <input type="text" value="YOUR.WATERMARK.HERE" oninput="updateText('display-watermark', this.value)">
-            </div>
-
-            <button class="download-btn" onclick="downloadPost()">Download High Quality PNG</button>
         </div>
     </div>
 
-    <script src="../js/soulful.js"></script>
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Export Settings</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label">Platform (Aspect Ratio)</label>
+<select id="export-ratio" class="saas-input" onchange="previewRatio(this.value)">
+    <option value="ratio-4-5">Instagram Portrait (4:5)</option>
+    <option value="ratio-1-1">Instagram / Facebook Square (1:1)</option>
+    <option value="ratio-9-16">Instagram Story / Reels (9:16)</option>
+    <option value="ratio-16-9">YouTube / Twitter (16:9)</option>
+</select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Image Format</label>
+                    <select id="export-format" class="saas-input">
+                        <option value="png">PNG (High Quality)</option>
+                        <option value="jpeg">JPG (Smaller Size)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="download-btn final-download-btn" onclick="executeDownload()">Download Image</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
